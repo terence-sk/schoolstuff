@@ -51,7 +51,7 @@ def computereceq(equation, result, guess, i, signs):
             eq[x] = abs(eq[x])
         part_result += eq[x]*gs[x]
 
-    return divide*(result+part_result)
+    return float("{:.6f}".format(divide*(result+part_result)))
 
 accuracy = pow(10, -6)
 
