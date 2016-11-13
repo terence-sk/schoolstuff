@@ -2,7 +2,7 @@ import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
-pic = Image.open('test.jpg')
+pic = Image.open('monalisa.png')
 width, height = pic.size
 
 a = np.array(pic)

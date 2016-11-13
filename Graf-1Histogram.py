@@ -2,7 +2,7 @@ import Image
 import array
 import numpy as np
 
-im = Image.open('test.jpg')
+im = Image.open('monalisa.png')
 rgb_im = im.convert("RGB")
 
 width, height = im.size
@@ -18,7 +18,7 @@ for x in range(0, height):
         histogram[average_value] += 1
         gs_im.putpixel((y, x), average_value)
 
-gs_im.save("output.jpg")
+gs_im.save('Graf-Mainmona.png')
 
 bin_counts, bin_edges = np.histogram(gs_im, 'auto')
 for idx, x in enumerate(bin_counts):

@@ -1,41 +1,39 @@
-from PIL import Image
+import Image
+import numpy as np
+
+image = Image.open("monalisa.png")
+image2 = image.convert('L')
+
+sirka, vyska = image2.size
+
+maska_r = 2
+#rozostrenie
+maska = ((1, 4, 7, 4 , 1),(4, 16, 26, 16, 4),(7, 26, 41, 26, 7),(4, 16, 26, 16, 4),(1, 4, 7, 4, 1))
 
 
-def apply_mask(input_pic, maska_r, maska):
-    sirka, vyska = input_pic.size
-    novy = Image.new('L', (sirka, vyska))
-    for y in range(0, vyska):
-        for x in range(0, sirka):
-            suma = 0
-            for t in range(-maska_r, maska_r+1):
-                if 0 <= y+t < vyska:
-                    for s in range(-maska_r, maska_r+1):
-                        if 0 <= x+s < sirka:
-                            suma += input_pic.getpixel((x + s, y + t)) * maska[s][t]
-            novy.putpixel((x, y), int(suma))
-    return novy
+novy = Image.new('L', (sirka, vyska))
+novy2 = Image.new('L', (sirka, vyska))
 
-obrazok = Image.open('monalisa.jpg')
-obrazok2 = obrazok.convert('L')
+for y in range(0,vyska):
+    for x in range(0,sirka):
+        sum = 0
+        for t in range(-maska_r,(maska_r+1)):
+            if y+t >= 0 and y+t < vyska:
+                for s in range(-maska_r,(maska_r+1)):
+                    if x+s >= 0 and x+s < sirka:
+                        sum += image2.getpixel((x+s,y+t))*maska[s][t]
 
-maska_r = 1
+        novy.putpixel((x,y), int(sum/273))
 
-maska = [[1.0/((2*maska_r+1)*(2*maska_r+1))]*(2*maska_r+1) for i in range(2*maska_r+1)]
+#povodny ciernobiely obrazok
+image2.save('Graf-Main6mona1.png')
+#rozostreny obrazok
+novy.save('Graf-Main6mona2.png')
 
-print(maska)
+for y in range(0,vyska):
+    for x in range(0,sirka):
+        novy2.putpixel((x,y), int(image2.getpixel((x,y)) + (image2.getpixel((x,y))-novy.getpixel((x,y)))))
 
-maska_gauss = [
-    [1/16, 1/8, 1/16],
-    [1/8,1/4,1/8],
-    [1/16,1/8,1/16]
-]
+#zaostreny obrazok
+novy2.save('Graf-Main6mona3.png')
 
-rozostreny = obrazok2.convert('L')
-rozostreny = apply_mask(rozostreny, maska_r, maska_gauss)
-rozostreny.save('monagauss.png')
-
-Image.blend(rozostreny, obrazok2, 0.5).save('scitanie5.jpg')
-sirka, vyska = rozostreny.size
-for y in range(0, vyska):
-    for x in range(0, sirka):
-        print("neche sa mi!")

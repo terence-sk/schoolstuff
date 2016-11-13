@@ -15,7 +15,7 @@ def apply_mask(input_pic, maska_r, maska):
             novy.putpixel((x, y), int(suma))
     return novy
 
-obrazok = Image.open('test.jpg')
+obrazok = Image.open('monalisa.jpg')
 obrazok2 = obrazok.convert('L')
 
 maska_r = 1
@@ -24,16 +24,18 @@ maska = [[1.0/((2*maska_r+1)*(2*maska_r+1))]*(2*maska_r+1) for i in range(2*mask
 
 print(maska)
 
-maska_laplac = [
-    [0,-1,0],
-    [-1,5,-1],
-    [0,-1,0]
+maska_gauss = [
+    [1/16, 1/8, 1/16],
+    [1/8,1/4,1/8],
+    [1/16,1/8,1/16]
 ]
 
-obrazok_laplac = obrazok2.convert('L')
-obrazok_laplac = apply_mask(obrazok_laplac, maska_r, maska_laplac)
-obrazok2 = apply_mask(obrazok2, maska_r, maska)
-obrazok_laplac.save('laplac.png')
-obrazok2.save('baseMask.png')
+rozostreny = obrazok2.convert('L')
+rozostreny = apply_mask(rozostreny, maska_r, maska_gauss)
+rozostreny.save('monagauss.png')
 
-Image.blend(obrazok_laplac,obrazok2,0.5).save('scitanie5.jpg')
+Image.blend(rozostreny, obrazok2, 0.5).save('scitanie5.jpg')
+sirka, vyska = rozostreny.size
+for y in range(0, vyska):
+    for x in range(0, sirka):
+        print("neche sa mi!")
