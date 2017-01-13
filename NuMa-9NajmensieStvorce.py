@@ -11,8 +11,8 @@ def multiplyArraysAndSum(a1,a2):
         suma += a1[i]*a2[i]
     return suma
 
-uzly = [-3,-1,1,3]
-funkcne_h = [2,5,3,4]
+uzly = [-2,-1,0,1,2]
+funkcne_h = [-2,1,0,0,3]
 
 pocet_uzly = len(uzly)
 suma_uzly = sum(uzly)

@@ -1,91 +1,32 @@
-def rownorm(matrix):
-    sums = []
-    rowSum = 0
-
-    for i in range(0, len(matrix)):
-        for j in range(0, len(matrix)):
-            rowSum += abs(matrix[i][j])
-        sums.append(rowSum)
-        rowSum = 0
-
-    return max(sums)
+from pprint import pprint
+from numpy import array, diag, diagflat, dot, subtract, linalg
 
 
-def colnorm(matrix):
-    sums = []
-    colSum = 0
+# A = priklad, b = vysledky, xk1 = tip
+def jacobi(A, b, xk1):
 
-    for i in range(0, len(matrix)):
-        for j in range(0, len(matrix)):
-            colSum += abs(matrix[j][i])
-        sums.append(colSum)
-        colSum = 0
+    xk0 = [0, 0, 0]
 
-    return max(sums)
+    # D = diagonala matice A (priklad)
+    D = diag(A)
+    # Odcitame od matice A hodnoty na diagonale
+    R = A - diagflat(D)
 
+    # numpy.dot = nasobenie matic
+    while True:
 
-def frobnorm(matrix):
-    total = 0
+        #aktualna hodnota
+        xk1 = (b - dot(R, xk1)) / D
 
-    for i in range(0, len(matrix)):
-        for j in range(0, len(matrix)):
-            total += pow(matrix[i][j], 2)
+        # kontrolujeme normu...
+        if linalg.norm(subtract(xk1, xk0)) <= pow(10, -9):
+            return xk1
 
-    return pow(total, 1/2)
+        # tu si ulozim predoslu hodnotu
+        xk0 = xk1[:]
 
+A = array([[7, 2, -3], [1, 10, 2], [4, 3, -8]])
+b = array([14, 20, 16])
+guess = array([0, 0, 0])
 
-def computereceq(equation, result, guess, i, signs):
-    eq = equation[:]
-    sg = signs[:]
-    gs = guess[:]
-    divide = 1/eq[i]
-    eq.pop(i)
-    sg.pop(i)
-    gs.pop(i)
-    part_result = 0
-
-    for x in range(0, len(eq)):
-        if sg[x] == '-':
-            eq[x] = -eq[x]
-        if sg[x] == '+':
-            eq[x] = abs(eq[x])
-        part_result += eq[x]*gs[x]
-
-    return float("{:.6f}".format(divide*(result+part_result)))
-
-accuracy = pow(10, -6)
-
-testmatrix = [[7, 2, -3],
-              [1, 10, 2],
-              [4, 3, -8]
-              ]
-
-# TODO metodu na generovanie tohto pola z testmatrix
-signs = [['-', '-', '+'],
-         ['-', '-', '-'],
-         ['-', '-', '+']
-         ]
-eqresultsmatrix = [14, 20, 16]
-guessmatrix = [0, 0, 0]
-
-#print(rownorm(testmatrix), colnorm(testmatrix), frobnorm(testmatrix))
-
-realresults = []
-iters = 0
-
-while True:
-
-    for i in range(0, len(testmatrix)):
-        realresults.append(computereceq(testmatrix[i], eqresultsmatrix[i], guessmatrix, i, signs[i]))
-
-    if abs(realresults[0]-guessmatrix[0]) <= accuracy:
-        break
-
-    iters += 1
-    print(iters)
-
-    guessmatrix.clear()
-    guessmatrix = realresults[:]
-    realresults.clear()
-    print(guessmatrix)
-
+pprint(jacobi(A, b, guess))

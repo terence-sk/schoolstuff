@@ -2,13 +2,16 @@ import numpy as np
 
 
 def gauss(A, b, x, n):
-
+    # hodnoty pod diagonalou, tril = lower triangle
     L = np.tril(A)
-    print("Normalna matica", A)
-    print("Hodnoty pod diagonalou", L)
+    print("Normalna matica\n", A)
+    print("Hodnoty pod diagonalou\n", L)
+    # tu to uz staci odcitat, hodnoty nad diagonalou dostaneme
     U = A - L
-    print("Hodnoty nad diagonalou", U)
+    print("Hodnoty nad diagonalou\n", U)
     for i in range(n):
+        #dot = skalarny sucin
+        #inv = invertne matice a vynasobi ju s povodnou
         x = np.dot(np.linalg.inv(L), b - np.dot(U, x))
         print(str(i).zfill(3))
         print(x)
