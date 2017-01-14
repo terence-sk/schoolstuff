@@ -27,5 +27,18 @@ interval_end = 1
 num_intervals = 4
 h = (interval_end - interval_start) / num_intervals
 
-print( (h/2 ) * scitajHodnotyFunkcie(getValues(interval_start, h, num_intervals)))
+xk0 = 0
+xk1 = 1
+presnost = pow(10, -6)
 
+while True:
+    xk1 = (h/2) * scitajHodnotyFunkcie(getValues(interval_start, h, num_intervals))
+
+    if abs(xk0 - xk1) <= presnost:
+        break
+
+    xk0 = xk1
+    h /= 2
+    num_intervals *= 2
+
+print(xk1)

@@ -18,7 +18,7 @@ def jacobi(A, b, xk1):
         #aktualna hodnota
         xk1 = (b - dot(R, xk1)) / D
 
-        # kontrolujeme normu...
+        # kontrolujeme normu... presnost na 9 miest
         if linalg.norm(subtract(xk1, xk0)) <= pow(10, -9):
             return xk1
 
