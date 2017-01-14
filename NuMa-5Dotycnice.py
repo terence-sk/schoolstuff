@@ -2,19 +2,19 @@ import math
 
 
 def f(x):
-    return x - math.cos(x)
+    return x**3 - math.log(10-x, math.e)
 
 
 def f_first_deriv(x):
-    return 1 + math.sin(x)
+    return 3*x**2+(1/10-x)
 
 
 def f_second_deriv(x):
-    return math.cos(x)
+    return 6*x+(1/(10-x)**2)
 
 
-a = 0.7
-b = 0.8
+a = 1.25
+b = 1.3
 
 actual = 0.0
 previous = 0.0

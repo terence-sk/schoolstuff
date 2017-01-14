@@ -15,7 +15,7 @@ def gauss(A, b, xk1):
         #aktualna
         xk1 = dot(linalg.inv(L), b - dot(U, xk1))
 
-        print(xk1)
+        #print(xk1)
         #kontrola
         if linalg.norm(subtract(xk1, xk0)) <= pow(10, -9):
             return xk1
@@ -24,8 +24,8 @@ def gauss(A, b, xk1):
 
     return xk1
 
-equations = array([[7.0, 2.0, -3.0], [1.0, 10.0, 2.0], [4.0, 3.0, -8.0]])
-equation_results = [14.0, 20.0, 16.0]
+equations = array([[4, -1, 2], [2.0, 5.0, 1.0], [1.0, 1.0, -3.0]])
+equation_results = [-12.0, 5.0, -4.0]
 guesses = [0.0, 0.0, 0.0]
 
-print(gauss(equations, equation_results, guesses))
+print("Vysledny vektor: ", gauss(equations, equation_results, guesses))

@@ -2,11 +2,11 @@ import math
 
 
 def f(x):
-    return math.sqrt(x) - math.cos(x)
+    return x**3 - math.log(10-x, math.e)
 
-a = 0.7
-b = 0.8
-pom = 0.7
+a = 1.2
+b = 1.3
+pom = 1.2
 presnost = pow(10, -5)
 
 while True:

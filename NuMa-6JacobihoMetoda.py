@@ -1,4 +1,3 @@
-from pprint import pprint
 from numpy import array, diag, diagflat, dot, subtract, linalg
 
 
@@ -25,8 +24,8 @@ def jacobi(A, b, xk1):
         # tu si ulozim predoslu hodnotu
         xk0 = xk1[:]
 
-A = array([[7, 2, -3], [1, 10, 2], [4, 3, -8]])
-b = array([14, 20, 16])
+A = array([[4, -1, 2], [2, 5, 1], [1, 1, -3]])
+b = array([-12, 5, -4])
 guess = array([0, 0, 0])
 
-pprint(jacobi(A, b, guess))
+print(jacobi(A, b, guess))
