@@ -9,7 +9,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 # nacitaj obrazok a skonvertuj ho do odtienov sedej
-obrazok = Image.open('gaboboss.jpg').convert('L')
+obrazok = Image.open('monalisa.png').convert('L')
 sirka, vyska = obrazok.size
 
 # generuj histogram

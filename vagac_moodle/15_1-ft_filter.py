@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # nacitaj obrazok a skonvertuj ho do odtienov sedej
-fxy = Image.open('lena512.png').convert('L')
+fxy = Image.open('monalisa.png').convert('L')
 sirka, vyska = fxy.size
 ds = 20
 dv = 20

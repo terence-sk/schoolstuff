@@ -11,29 +11,31 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def DFT_np(fx):
-	"""Compute the discrete Fourier Transform of the 1D array x"""
-	fx = np.asarray(fx, dtype=float)
-	N = fx.shape[0]
-	u = np.arange(N)
-	x = u.reshape((N, 1))
-	M = np.exp(-2j * np.pi * x * u / N)
-	return np.dot(M, fx)
+    """Compute the discrete Fourier Transform of the 1D array x"""
+    fx = np.asarray(fx, dtype=float)
+    N = fx.shape[0]
+    u = np.arange(N)
+    x = u.reshape((N, 1))
+    M = np.exp(-2j * np.pi * x * u / N)
+    return np.dot(M, fx)
+
 
 def FFT_np(x):
-	"""A recursive implementation of the 1D Cooley-Tukey FFT"""
-	x = np.asarray(x, dtype=float)
-	N = x.shape[0]
+    """A recursive implementation of the 1D Cooley-Tukey FFT"""
+    x = np.asarray(x, dtype=float)
+    N = x.shape[0]
 
-	if N % 2 > 0:
-		raise ValueError("size of x must be a power of 2")
-	elif N <= 32:  # this cutoff should be optimized
-		return DFT_np(x)
-	else:
-		X_even = FFT_np(x[::2])
-		X_odd = FFT_np(x[1::2])
-		factor = np.exp(-2j * np.pi * np.arange(N) / N)
-		return np.concatenate([X_even + factor[:N / 2] * X_odd, X_even + factor[N / 2:] * X_odd])
+    if N % 2 > 0:
+        raise ValueError("size of x must be a power of 2")
+    elif N <= 32:  # this cutoff should be optimized
+        return DFT_np(x)
+    else:
+        X_even = FFT_np(x[::2])
+        X_odd = FFT_np(x[1::2])
+        factor = np.exp(-2j * np.pi * np.arange(N) / N)
+        return np.concatenate([X_even + factor[:N / 2] * X_odd, X_even + factor[N / 2:] * X_odd])
 
 
 # priprav (generuj) data #1: nahodne
