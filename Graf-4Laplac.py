@@ -36,4 +36,10 @@ obrazok2 = apply_mask(obrazok2, maska_r, maska)
 obrazok_laplac.save('Graf-4mona1.png')
 obrazok2.save('Graf-4mona2.png')
 
+
+#f the alpha is 0.0, a copy of the first image is returned.
+# If the alpha is 1.0, a copy of the second image is returned.
+# There are no restrictions on the alpha value.
+# If necessary, the result is clipped to fit into the allowed output range.
+
 Image.blend(obrazok_laplac,obrazok2,0.5).save('Graf-4mona3.png')

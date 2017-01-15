@@ -21,8 +21,6 @@ for x in range(0, height):
 gs_im.save('Graf-Mainmona.png')
 
 bin_counts, bin_edges = np.histogram(gs_im, 'auto')
+print(bin_counts)
 for idx, x in enumerate(bin_counts):
     print(idx,  x)
-
-#for idx, x in enumerate(histogram):
-#    print(idx, x)
