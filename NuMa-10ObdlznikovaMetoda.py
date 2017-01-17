@@ -14,12 +14,13 @@ def getValues(start, step, count):
 
 def scitajHodnotyFunkcie(hodnoty):
     suma = 0
+    #x^2 - 5x
     for i in range(1, len(hodnoty)):
-        suma += math.e**((hodnoty[i-1]+hodnoty[i]) / 2)
+        suma += ((hodnoty[i]**2-5*hodnoty[i])+(hodnoty[i-1]**2-5*hodnoty[i-1]))/2
     return suma
 
-interval_start = -1
-interval_end = 1
+interval_start = 6
+interval_end = 10
 num_intervals = 4
 h = (interval_end - interval_start) / num_intervals
 presnost = pow(10, -6)

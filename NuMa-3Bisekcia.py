@@ -2,10 +2,10 @@ import math
 
 
 def moja_funkcia(x):
-    return x**3 - math.log(10-x, math.e)
+    return x**3 - 12*x + 8
 
 interval_a = 1
-interval_b = 2
+interval_b = 1.1
 presnost = pow(10, -3)
 
 interval_aprox = (interval_a + interval_b) / 2

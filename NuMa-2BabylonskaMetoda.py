@@ -1,5 +1,5 @@
-pociatocna_hodnota = 200
-cislo_na_odmocnenie = 4843
+pociatocna_hodnota = 8
+cislo_na_odmocnenie = -99
 pozadovana_presnost = pow(10, -2)
 
 xk = 1/2*(pociatocna_hodnota + (cislo_na_odmocnenie / pociatocna_hodnota))
